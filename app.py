@@ -1,7 +1,6 @@
 from flask import Flask, render_template
-from flask_lambda import FlaskLambda  # Import FlaskLambda for AWS Lambda compatibility
 
-app = FlaskLambda(__name__, template_folder='HTML')  # Use FlaskLambda instead of Flask
+app = Flask(__name__, template_folder='HTML')  # Use FlaskLambda instead of Flask
 
 
 @app.route('/')
@@ -20,4 +19,4 @@ def about():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
