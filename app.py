@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import socket
 
 app = Flask(__name__, template_folder='HTML')  # Use FlaskLambda instead of Flask
 
@@ -17,6 +18,6 @@ def signin():
 def about():
     return render_template("about.html", title="About")
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    IPAddr = socket.gethostbyname(socket.gethostname())
+    app.run(debug=True, host=IPAddr)
