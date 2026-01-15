@@ -5,31 +5,48 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Set up view engine and static files
-app.set('view engine', 'html');
-app.set('views', path.join(__dirname, 'HTML'));
-app.engine('html', (filepath, options, callback) => {
-  const fs = require('fs');
-  fs.readFile(filepath, (err, content) => {
-    if (err) return callback(err);
-    const rendered = content.toString();
-    return callback(null, rendered);
-  });
-});
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'static')));
 
+// Helper function to render pages with template
+const renderPage = (page) => {
+  return (req, res) => {
+    res.render('template', {
+      title: getPageTitle(page),
+      page: `pages/${page}`
+    });
+  };
+};
+
+// Get page titles
+const getPageTitle = (page) => {
+  const titles = {
+    'welcome': 'Welcome',
+    'news': 'News',
+    'blog': 'Blog',
+    'about': 'About',
+    'contact': 'Contact',
+    'signin': 'Sign In',
+    'signup': 'Sign Up'
+  };
+  return titles[page] || 'TheStreetPost';
+};
+
 // Routes
-app.get('/', (req, res) => {
-  res.render('welcome.html', { title: 'Welcome' });
-});
+app.get('/', renderPage('welcome'));
+app.get('/news', renderPage('news'));
+app.get('/blog', renderPage('blog'));
+app.get('/about', renderPage('about'));
+app.get('/contact', renderPage('contact'));
+app.get('/signin', renderPage('signin'));
+app.get('/signup', renderPage('signup'));
 
-app.get('/signin', (req, res) => {
-  res.render('signIn.html', { title: 'Sign In' });
-});
-
-app.get('/about', (req, res) => {
-  res.render('about.html', { title: 'About' });
+// Handle 404
+app.use((req, res) => {
+  res.status(404).render('pages/404', { title: 'Not Found' });
 });
 
 // Start server

@@ -1,7 +1,41 @@
-{%extends "template.html"%}
-{%block content%}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to TheStreetPost</h1>
+        <p>Your Ultimate Source for Street Culture & Urban News</p>
+        <a href="/news" class="btn btn-primary">Explore News</a>
+        <a href="/signin" class="btn btn-secondary">Join Us</a>
+    </div>
+</section>
 
-<h2>Welcome to Our Website!</h2>
+<section class="featured">
+    <h2>Featured Stories</h2>
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-image"></div>
+            <h3>Urban Culture</h3>
+            <p>Discover the latest trends in street fashion, art, and music.</p>
+            <a href="/news">Read More →</a>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <h3>Local News</h3>
+            <p>Stay updated with what's happening in your neighborhood.</p>
+            <a href="/news">Read More →</a>
+        </div>
+        <div class="card">
+            <div class="card-image"></div>
+            <h3>Community</h3>
+            <p>Join our community of street culture enthusiasts.</p>
+            <a href="/about">Learn More →</a>
+        </div>
+    </div>
+</section>
 
-
-{% endblock %}
+<section class="cta">
+    <h2>Stay Updated</h2>
+    <p>Subscribe to our newsletter for the latest street culture news</p>
+    <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+</section>
